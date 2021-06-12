@@ -1,0 +1,252 @@
+:root {
+  --clr-bglinear1: #158b7d;
+  --clr-bglinear2: #24815a;
+  --clr-bggrey1: #eaeaea; /*job containter*/
+  --clr-bggrey2: #dddddd; /*complete task bg*/
+  --clr-green: #54a353;
+  --clr-red: #922f2f;
+  --clr-yellow: #e1b311;
+  --clr-text-default: #000000; /*Default Text Color*/
+  --crl-text-inactive: #585858; /*Complete job text*/
+  --clr-icons: #fff; /*Icons text color*/
+}
+
+*,
+html,
+body {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(45deg, #158b7d 42.29%, #24815a 85.87%);
+}
+
+.wrapper {
+  margin: 50px auto 20px auto;
+  max-width: 600px;
+  min-width: 300px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 1.7em;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 90%;
+  font-weight: 600;
+}
+
+h5 {
+  color: #922f2f;
+  font-weight: 500;
+  margin-left: 0.9rem;
+}
+
+.btn-new-job {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5px 15px;
+  border-style: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: var(--clr-green);
+  margin-bottom: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+form {
+  width: 100%;
+  /* margin-bottom: 15px; */
+}
+
+/* ================ NEW JOB CONTAINER ======== */
+.add-new-job-container,
+.job {
+  display: flex;
+  flex-basis: 100%;
+  width: 100%;
+  background-color: var(--clr-bggrey2);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+.add-new-job-container {
+  background-color: #cacaca;
+}
+
+/* All Left panels (refactor to text-container::before ?) */
+.left-panel {
+  width: 1.8em;
+  display: flex;
+  justify-content: center;
+}
+
+/* All text containers (wrappers) */
+.form-text-container,
+.text-container {
+  width: 100%;
+  padding: 0 3px;
+}
+
+/* All title containers */
+.form-text-container input,
+.title {
+  width: 100%;
+  background-color: #fff;
+  border-style: none;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  margin: 2px 0 5px 0;
+  padding-left: 3px;
+}
+
+/* Description containers */
+.form-text-container textarea {
+  height: 3em;
+  margin-top: 3px;
+  width: 100%;
+  background-color: #fff;
+  border-style: none;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  resize: none;
+  padding-left: 3px;
+}
+
+.description {
+  margin-top: 3px;
+  width: 100%;
+  background-color: #fff;
+  border-style: none;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  padding-left: 5px;
+  padding-bottom: 3px;
+}
+
+.description p {
+  font-size: 90%;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+}
+
+/* Date text formating */
+.date-created {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.date-created p {
+  font-family: Poppins;
+  font-size: 70%;
+  color: #585858;
+}
+
+/* Right buttons panel (refactor to textcontainer::after?) */
+.buttons-panel {
+  width: 41px;
+  padding: 0 0.5em 0 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+}
+
+/* All similar button props */
+.buttons-panel button,
+.left-panel button {
+  width: 25px;
+  height: 25px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  margin-bottom: 15px;
+  margin-top: 3px;
+}
+
+/* Button bg-colors */
+.btn-add,
+.btn-checked {
+  background-color: var(--clr-green);
+}
+/* .btn-checked {
+  margin-top: 3px;
+} */
+
+.btn-back,
+.btn-edit {
+  background-color: var(--clr-yellow);
+}
+
+.btn-delete {
+  background-color: var(--clr-red);
+}
+
+.footer p {
+  text-align: center;
+}
+
+@media (max-width: 360px) {
+  body {
+    width: 100vw;
+  }
+  .wrapper {
+    margin: 20px auto 20px auto;
+    padding: 0.5rem;
+    padding-right: 0.5rem;
+    /* width: 50%; */
+  }
+  header {
+    flex-direction: column;
+  }
+}
