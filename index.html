@@ -14,7 +14,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>To-doo-ly App</title>
+    <script defer src="script.js"></script>
+    <title>To-do-ly App</title>
   </head>
   <body>
     <div class="wrapper">
@@ -31,49 +32,51 @@
       </button>
 
       <!-- Add new Job Container default=hidden -->
-      <form action="#" method="GET">
-        <div class="add-new-job-container">
-          <div class="left-panel">&nbsp;</div>
-          <div class="form-text-container">
-            <div class="form-item">
-              <input
-                type="text"
-                name="title"
-                id="title"
-                class="form-title-input"
-                placeholder="Add new job.."
-                aria-label="Add new job"
-              />
+      <div class="form hidden">
+        <form action="#" method="GET">
+          <div class="add-new-job-container">
+            <div class="left-panel">&nbsp;</div>
+            <div class="form-text-container">
+              <div class="form-item">
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  class="form-title-input"
+                  placeholder="Add new job.."
+                  aria-label="Add new job"
+                />
+              </div>
+              <div class="form-item">
+                <textarea
+                  name="description"
+                  id="description"
+                  class="form-descr-input"
+                  placeholder="Description.."
+                  aria-label="Description"
+                  cols="1"
+                  rows="2"
+                ></textarea>
+              </div>
             </div>
-            <div class="form-item">
-              <textarea
-                name="description"
-                id="description"
-                class="form-descr-input"
-                placeholder="Description.."
-                aria-label="Description"
-                cols="1"
-                rows="2"
-              ></textarea>
+            <div class="buttons-panel">
+              <button type="submit" class="btn btn-add">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button class="btn btn-back">
+                <i class="fas fa-undo-alt"></i>
+              </button>
             </div>
           </div>
-          <div class="buttons-panel">
-            <button type="submit" class="btn-add">
-              <i class="fas fa-plus"></i>
-            </button>
-            <button class="btn-back">
-              <i class="fas fa-undo-alt"></i>
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
 
       <!-- Jobslist container -->
       <div class="todolist-container">
         <!-- Job item container-->
         <div class="job" id="1">
           <div class="left-panel">
-            <button type="" class="btn-checked">
+            <button type="" class="btn btn-checked">
               <i class="fas fa-check"></i>
             </button>
           </div>
@@ -83,7 +86,7 @@
             </div>
             <div class="description">
               <p>
-                Job Description in two od more lines depending on the browser
+                Task Description in two od more lines depending on the browser
                 width. Basically this is the only responsive part.
               </p>
             </div>
@@ -92,14 +95,16 @@
             </div>
           </div>
           <div class="buttons-panel">
-            <button class="btn-edit"><i class="fas fa-pen"></i></button>
-            <button class="btn-delete"><i class="far fa-trash-alt"></i></button>
+            <button class="btn btn-edit"><i class="fas fa-pen"></i></button>
+            <button class="btn btn-delete">
+              <i class="far fa-trash-alt"></i>
+            </button>
           </div>
         </div>
 
         <div class="job" id="2">
           <div class="left-panel">
-            <button type="" class="btn-checked">
+            <button type="" class="btn btn-checked">
               <i class="fas fa-check"></i>
             </button>
           </div>
@@ -118,14 +123,16 @@
             </div>
           </div>
           <div class="buttons-panel">
-            <button class="btn-edit"><i class="fas fa-pen"></i></button>
-            <button class="btn-delete"><i class="far fa-trash-alt"></i></button>
+            <button class="btn btn-edit"><i class="fas fa-pen"></i></button>
+            <button class="btn btn-delete">
+              <i class="far fa-trash-alt"></i>
+            </button>
           </div>
         </div>
 
         <div class="job" id="3">
           <div class="left-panel">
-            <button type="" class="btn-checked">
+            <button type="" class="btn btn-checked">
               <i class="fas fa-check"></i>
             </button>
           </div>
@@ -144,8 +151,10 @@
             </div>
           </div>
           <div class="buttons-panel">
-            <button class="btn-edit"><i class="fas fa-pen"></i></button>
-            <button class="btn-delete"><i class="far fa-trash-alt"></i></button>
+            <button class="btn btn-edit"><i class="fas fa-pen"></i></button>
+            <button class="btn btn-delete">
+              <i class="far fa-trash-alt"></i>
+            </button>
           </div>
         </div>
         <!-- Job panel end -->
