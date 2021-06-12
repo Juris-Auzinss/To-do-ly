@@ -8,7 +8,7 @@ JavaScript, HTML, CSS, PHP, MySQL.
 A simple To-Do-List application, with three main features:
 
 - list of all tasks.
-- foom to add a new task.
+- form to add a new task.
 - form to edit a specific task.
 
 A new task form is displayed when the "+ Add new Job.." button is clicked.
