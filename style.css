@@ -1,6 +1,6 @@
 :root {
   --clr-bglinear1: #158b7d;
-  --clr-bglinear2: #24815a;
+  --clr-bglinear2: #299467;
   --clr-bggrey1: #eaeaea; /*job containter*/
   --clr-bggrey2: #dddddd; /*complete task bg*/
   --clr-green: #54a353;
@@ -11,25 +11,22 @@
   --clr-icons: #fff; /*Icons text color*/
 }
 
-*,
-html,
-body {
-  font-family: Poppins, sans-serif;
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-size: 18px;
+  font-family: Poppins, sans-serif;
 }
 
 body {
   height: 100vh;
   width: 100%;
-  background: linear-gradient(45deg, #158b7d 42.29%, #24815a 85.87%);
-}
-
-/* Utility class Hidden: */
-.hidden {
-  display: none;
+  background: linear-gradient(
+    45deg,
+    var(--clr-bglinear1) 42.29%,
+    var(--clr-bglinear2) 85.87%
+  );
 }
 
 .wrapper {
@@ -41,7 +38,7 @@ body {
   border-radius: 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
-  padding: 1.5rem;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,17 +70,39 @@ h5 {
   margin-left: 0.9rem;
 }
 
+.tasks {
+  list-style: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tasks::-webkit-scrollbar {
+  width: 0;
+}
+
 /* ================ NEW JOB CONTAINER ======== */
 .form {
   width: 100%;
-  animation: visible 1s;
-  -webkit-animation: visible 1s;
+  opacity: 1;
+  /* animation: visible 1s; */
+  /* -webkit-animation: visible 1s; */
+  transition: transform 0.5s, opacity 0.5s ease-in-out;
+}
+
+.form.hidden {
+  transform: translateY(-30rem);
+  height: 0;
+  margin-bottom: 0;
+  opacity: 0;
 }
 
 .add-new-job-container,
 .job {
   display: flex;
-  flex-basis: 100%;
+  /* flex-basis: 100%; */
   width: 100%;
   background-color: var(--clr-bggrey2);
   border-radius: 5px;
@@ -91,20 +110,22 @@ h5 {
   -moz-border-radius: 5px;
   padding: 8px;
   margin-bottom: 15px;
+  /* animation: visible 1s; */
 }
 
 .add-new-job-container {
   background-color: #cacaca;
 }
 
-/* All Left panels (refactor to text-container::before ?) */
+/* All Left panels*/
 .left-panel {
   width: 1.8em;
   display: flex;
   justify-content: center;
+  padding: 0 5px 0 0;
 }
 
-/* All text containers (wrappers) */
+/* All text containers */
 .form-text-container,
 .text-container {
   width: 100%;
@@ -136,6 +157,12 @@ h5 {
   -moz-border-radius: 3px;
   resize: none;
   padding-left: 3px;
+}
+
+.text-container.checked > * {
+  background-color: var(--clr-bggrey2);
+  color: var(--crl-text-inactive);
+  text-decoration: line-through;
 }
 
 .description {
@@ -216,6 +243,14 @@ h5 {
   margin-bottom: 15px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
+}
+.disabled {
+  cursor: default;
+  background-color: #797979;
+  color: #a1a1a1;
+}
+.disabled:hover {
+  transform: none;
 }
 
 /* Button bg-colors */

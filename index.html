@@ -31,9 +31,8 @@
         <p>Add new job..</p>
       </button>
 
-      <!-- Add new Job Container default=hidden -->
-      <div class="form hidden">
-        <form action="#" method="GET">
+      <ul class="tasks">
+        <form class="form hidden">
           <div class="add-new-job-container">
             <div class="left-panel">&nbsp;</div>
             <div class="form-text-container">
@@ -41,21 +40,17 @@
                 <input
                   type="text"
                   name="title"
-                  id="title"
                   class="form-title-input"
                   placeholder="Add new job.."
-                  aria-label="Add new job"
                 />
               </div>
               <div class="form-item">
                 <textarea
                   name="description"
-                  id="description"
                   class="form-descr-input"
                   placeholder="Description.."
-                  aria-label="Description"
                   cols="1"
-                  rows="2"
+                  rows="3"
                 ></textarea>
               </div>
             </div>
@@ -63,18 +58,14 @@
               <button type="submit" class="btn btn-add">
                 <i class="fas fa-plus"></i>
               </button>
-              <button class="btn btn-back">
+              <button type="reset" class="btn btn-back">
                 <i class="fas fa-undo-alt"></i>
               </button>
             </div>
           </div>
         </form>
-      </div>
 
-      <!-- Jobslist container -->
-      <div class="todolist-container">
-        <!-- Job item container-->
-        <div class="job" id="1">
+        <!-- <li class="job" data-id="1">
           <div class="left-panel">
             <button type="" class="btn btn-checked">
               <i class="fas fa-check"></i>
@@ -100,68 +91,12 @@
               <i class="far fa-trash-alt"></i>
             </button>
           </div>
-        </div>
+        </li> -->
+        <!-- 
 
-        <div class="job" id="2">
-          <div class="left-panel">
-            <button type="" class="btn btn-checked">
-              <i class="fas fa-check"></i>
-            </button>
-          </div>
-          <div class="text-container">
-            <div class="title">
-              <h2>Create Todooly app</h2>
-            </div>
-            <div class="description">
-              <p>
-                Job Description in two od more lines depending on the browser
-                width. Basically this is the only responsive part.
-              </p>
-            </div>
-            <div class="date-created">
-              <p>Created: 2020.06.11</p>
-            </div>
-          </div>
-          <div class="buttons-panel">
-            <button class="btn btn-edit"><i class="fas fa-pen"></i></button>
-            <button class="btn btn-delete">
-              <i class="far fa-trash-alt"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="job" id="3">
-          <div class="left-panel">
-            <button type="" class="btn btn-checked">
-              <i class="fas fa-check"></i>
-            </button>
-          </div>
-          <div class="text-container">
-            <div class="title">
-              <h2>Create Todooly app</h2>
-            </div>
-            <div class="description">
-              <p>
-                Job Description in two od more lines depending on the browser
-                width. Basically this is the only responsive part.
-              </p>
-            </div>
-            <div class="date-created">
-              <p>Created: 2020.06.11</p>
-            </div>
-          </div>
-          <div class="buttons-panel">
-            <button class="btn btn-edit"><i class="fas fa-pen"></i></button>
-            <button class="btn btn-delete">
-              <i class="far fa-trash-alt"></i>
-            </button>
-          </div>
-        </div>
-        <!-- Job panel end -->
-      </div>
-      <!-- Joblist end  -->
+         -->
+      </ul>
     </div>
-    <!----wrapper end -->
     <div class="footer">
       <p>Created By Juris Auziņš</p>
     </div>
