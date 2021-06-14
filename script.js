@@ -1,5 +1,6 @@
 'use strict';
 
+//Create Task Class
 class Task {
   date = new Date();
   id = (Date.now() + '').slice(-10);
@@ -12,6 +13,7 @@ class Task {
     this.published = this._formatTaskDate(this.date, navigator.language);
   }
 
+  //Implementing of date transforming to day count
   _formatTaskDate(date, locale) {
     const calcDaysPassed = (date1, date2) =>
       Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
@@ -47,6 +49,7 @@ const btnEdit = document.querySelector('.btn-edit');
 const btnDelete = document.querySelector('.btn-delete');
 const btnChecked = document.querySelector('.btn-checked');
 
+//Create App class
 class App {
   todoList = [];
   constructor() {
@@ -203,7 +206,7 @@ class App {
       item.remove();
     }
 
-    //DELET TASK FUNCTIONALITY:
+    //DELETE TASK FUNCTIONALITY:
     if (e.target.classList.contains('btn-delete')) {
       //Remove DOM
       item.remove();
@@ -275,12 +278,6 @@ class App {
   //-REMOVE
   _removeLocalStorage(index) {
     localStorage.removeItem('tasks', JSON.stringify(this.todoList[index]));
-  }
-
-  _renderTasks() {
-    this.todoList.forEach(task => {
-      this._renderTask(task);
-    });
   }
 }
 

@@ -70,6 +70,8 @@ h5 {
   margin-left: 0.9rem;
 }
 
+/* ================= APP CONTAINER ================= */
+
 .tasks {
   list-style: none;
   overflow-y: scroll;
@@ -87,8 +89,6 @@ h5 {
 .form {
   width: 100%;
   opacity: 1;
-  /* animation: visible 1s; */
-  /* -webkit-animation: visible 1s; */
   transition: transform 0.5s, opacity 0.5s ease-in-out;
 }
 
@@ -110,6 +110,7 @@ h5 {
   margin-bottom: 15px;
 }
 
+/* ================ EDIT JOB CONTAINER ======== */
 .edit-job-container {
   display: flex;
   width: 100%;
@@ -117,13 +118,9 @@ h5 {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  /* margin-bottom: 15px; */
 }
 
-.add-new-job-container {
-  background-color: #cacaca;
-}
-
+/* ================ JOB CONTAINER ======== */
 .job {
   display: flex;
   width: 100%;
@@ -133,6 +130,7 @@ h5 {
   -moz-border-radius: 5px;
   padding: 8px;
   margin-bottom: 15px;
+  animation: visible 1s;
 }
 
 /* All Left panels*/
@@ -213,7 +211,7 @@ h5 {
   color: #585858;
 }
 
-/* Right buttons panel (refactor to textcontainer::after?) */
+/* Right buttons panel */
 .buttons-panel {
   width: 41px;
   padding: 0 0.5em 0 0.5em;
@@ -286,14 +284,6 @@ h5 {
   background-color: var(--clr-green);
 }
 
-.btn-checked i {
-  opacity: 0;
-}
-
-.checked > i {
-  opacity: 1;
-}
-
 .btn-back,
 .btn-edit {
   background-color: var(--clr-yellow);
@@ -303,15 +293,19 @@ h5 {
   background-color: var(--clr-red);
 }
 
+.btn-checked i {
+  opacity: 0;
+}
+
+.checked > i {
+  opacity: 1;
+}
+
 .footer p {
   text-align: center;
   font-size: 70%;
-  /* left: 3rem; */
   align-items: center;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translate(-50%, -50%);
+  position: relative;
 }
 
 @media (max-width: 360px) {
