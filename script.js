@@ -249,7 +249,7 @@ class App {
     const data = JSON.parse(localStorage.getItem('tasks'));
 
     if (!data) return;
-
+    //
     this.todoList = data;
     this.todoList.forEach(task => {
       this._renderTask(task);
