@@ -20,6 +20,9 @@ const formDescription = document.querySelector('.form-descr-input');
 //Todo List
 const toDoListCont = document.querySelector('.tasks');
 const job = document.querySelector('.job');
+const textContainer = document.querySelector('.text-container');
+const editForm = document.querySelector('.edit-form');
+
 //Buttons
 const btnAdd = document.querySelector('.btn-add');
 const btnBack = document.querySelector('.btn-back');
@@ -34,28 +37,35 @@ class App {
     this._getLocalStorage();
     //Attach event handlers
     btnNew.addEventListener('click', this._showForm.bind(this));
-    form.addEventListener('submit', this._newTask.bind(this));
+    // form.addEventListener('submit', this._newTask.bind(this));
+    wrapper.addEventListener('click', this._btnClick.bind(this));
   }
 
   //APP METEHODS(functions):
   //Show Input Form
   _showForm(e) {
+    e.preventDefault();
     form.classList.toggle('hidden');
     form.style.opacity = 1;
     btnNew.classList.toggle('disabled');
   }
 
   //Hide Input Form
-  _hideForm(e) {
-    if (!form.classList.contains('hidden')) form.classList.toggle('hidden');
+  _hideForm() {
+    e.preventDefault();
+    if (!form.classList.contains('hidden')) {
+      form.classList.add('hidden');
+    }
     form.style.display = 'none';
     btnNew.classList.toggle('disabled');
     formTitle.value = formDescription.value = '';
   }
 
-  //Load and Show all existing tasks
-  //Get data from local Storage
-  _getLocalStorage() {}
+  _hideFormAgain() {
+    form.classList.add('hidden');
+    btnNew.classList.toggle('disabled');
+    formTitle.value = formDescription.value = '';
+  }
 
   //Add new Task
   _newTask(e) {
@@ -65,28 +75,140 @@ class App {
     const description = formDescription.value;
     let task;
     //create a new Task from Task class:
-    task = new Task(title, description, true);
-
+    if (title.length > 0) {
+      task = new Task(title, description, false);
+    }
     //Render task in the list:
     this._renderTask(task);
 
-    // //Add just created task to #todoList array:
+    //Add just created task to #todoList array:
     this.todoList.push(task);
 
-    // //Hide form:
-    this._hideForm();
-
-    // //Set local Storage to all tasks:
+    //Set local Storage to all tasks:
     this._setLocalStorage();
+
+    //Hide form:
+    this._hideFormAgain();
+  }
+
+  //Button click delegation:
+  _btnClick(e) {
+    e.preventDefault();
+    //FORM clicks
+    if (e.target.classList.contains('btn-add')) {
+      this._newTask(e);
+    }
+    if (e.target.classList.contains('btn-back')) {
+      this._hideFormAgain();
+    }
+    //TASK FUNTIONS:
+    //get parent element of the click
+    let item = e.target.closest('.job');
+    if (!item) return;
+    let jobId = item.dataset.id;
+    //Find the task index in toDolist Array.
+    let index = this.todoList.findIndex(task => task.id === jobId);
+
+    //CHECKED FUNCTIONALITY:
+    if (e.target.classList.contains('btn-checked')) {
+      //CHange state of checked in todoList
+      if (!this.todoList[index].checked) {
+        this.todoList[index].checked = true;
+      } else {
+        this.todoList[index].checked = false;
+      }
+      //toggle classes in DOM:
+      let text = item.querySelector('.text-container');
+      text.classList.toggle('checked');
+      item.querySelector('.btn-checked').classList.toggle('checked');
+      //save checked status to local Storage:
+      this._setLocalStorage();
+    }
+
+    //EDIT TASK FUNCTIONALITY:
+    let title = '';
+    let description = '';
+    if (e.target.classList.contains('btn-edit')) {
+      //get title and description
+      title = item.querySelector('h2').innerHTML;
+      description = item.querySelector('p').innerHTML;
+      // create new HTML code for replacing in job as a childreplace()?
+      let editHtml = `
+          <div class="form edit-form">
+            <div class="edit-job-container">
+              <div class="left-panel">
+                <div class="left-panel">&nbsp;</div>
+              </div>
+              <div class="form-text-container">
+                <div class="form-item">
+                  <input
+                    type="text"
+                    name="title"
+                    class="form-title-input"
+                    value="${title}"
+                  />
+                </div>
+                <div class="form-item">
+                  <textarea
+                    type="text"
+                    name="description"
+                    class="form-descr-input"
+                  >${description}</textarea>
+                </div>
+              </div>
+              <div class="buttons-panel">
+                <button type="submit" class="btn btn-ok">
+                  <i class="fas fa-check"></i>
+                </button>
+                <button type="reset" class="btn btn-back">
+                  <i class="fas fa-undo-alt"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+      `;
+      item.innerHTML = editHtml;
+    }
+
+    //Submit to toDolist if btn-ok is clicked.
+    if (e.target.classList.contains('btn-ok')) {
+      // Set newly input values to Title and Description:
+      title = item.querySelector('input').value;
+      description = item.querySelector('textarea').value;
+      //Add changes to todoList array
+      this.todoList[index].title = title;
+      this.todoList[index].description = description;
+      //Push chenges to Local Storage
+      this._setLocalStorage();
+      //Reload local Storage
+      this._getLocalStorage();
+      //Remove EDIT TASK DOM
+      item.remove();
+    }
+
+    //DELET TASK FUNCTIONALITY:
+    if (e.target.classList.contains('btn-delete')) {
+      //Remove DOM
+      item.remove();
+      //Remove from todoList array
+      this.todoList.splice([index], 1);
+      //Remove from local Storage
+      this._removeLocalStorage(index);
+      //Reload local Storage
+      this._getLocalStorage();
+    }
   }
 
   //Render task
   _renderTask(task) {
+    if (!task) return;
     let html = `
     <li class="job" data-id="${task.id}">
       <div class="left-panel">
-        <button type="" class="btn btn-checked">
-          ${task.checked ? '<i class="fas fa-check"></i>' : ''}
+        <button type="" class="btn btn-checked ${
+          task.checked ? 'checked' : ''
+        }">
+          <i class="fas fa-check"></i>
         </button>
       </div>
       <div class=${
@@ -117,16 +239,28 @@ class App {
     toDoListCont.insertAdjacentHTML('afterend', html);
   }
 
+  //STORAGE FUNCTIONS:
+  //--SET
   _setLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(this.todoList));
   }
-
+  //-GET
   _getLocalStorage() {
     const data = JSON.parse(localStorage.getItem('tasks'));
 
     if (!data) return;
 
     this.todoList = data;
+    this.todoList.forEach(task => {
+      this._renderTask(task);
+    });
+  }
+  //-REMOVE
+  _removeLocalStorage(index) {
+    localStorage.removeItem('tasks', JSON.stringify(this.todoList[index]));
+  }
+
+  _renderTasks() {
     this.todoList.forEach(task => {
       this._renderTask(task);
     });
