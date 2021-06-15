@@ -28,6 +28,9 @@ body {
     var(--clr-bglinear2) 85.87%
   );
 }
+body::-webkit-scrollbar {
+  width: 0;
+}
 
 .wrapper {
   margin: 50px auto 20px auto;
