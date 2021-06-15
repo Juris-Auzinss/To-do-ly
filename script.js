@@ -52,6 +52,8 @@ const btnChecked = document.querySelector('.btn-checked');
 //Create App class
 class App {
   todoList = [];
+  titleEdit = '';
+  descrEdit = '';
   constructor() {
     //Get local storage
     this._getLocalStorage();
@@ -87,6 +89,11 @@ class App {
     formTitle.value = formDescription.value = '';
   }
 
+  _initializeList() {
+    const allJobs = document.querySelectorAll('.job');
+    console.log(allJobs);
+  }
+
   //Add new Task
   _newTask(e) {
     e.preventDefault();
@@ -98,14 +105,18 @@ class App {
     if (title.length > 0) {
       task = new Task(title, description, false);
     }
-    //Render task in the list:
-    this._renderTask(task);
 
     //Add just created task to #todoList array:
     this.todoList.push(task);
 
     //Set local Storage to all tasks:
     this._setLocalStorage();
+
+    // //Initialize:
+    // this._initializeList();
+
+    // //Render task in the list:
+    this._renderTask(task);
 
     //Hide form:
     this._hideFormAgain();
@@ -131,7 +142,7 @@ class App {
 
     //CHECKED FUNCTIONALITY:
     if (e.target.classList.contains('btn-checked')) {
-      //CHange state of checked in todoList
+      //Change state of checked in todoList array
       if (!this.todoList[index].checked) {
         this.todoList[index].checked = true;
       } else {
@@ -146,12 +157,13 @@ class App {
     }
 
     //EDIT TASK FUNCTIONALITY:
-    let title = '';
-    let description = '';
+    let titleTemp = '';
+    let descrTemp = '';
     if (e.target.classList.contains('btn-edit')) {
-      //get title and description
-      title = item.querySelector('h2').innerHTML;
-      description = item.querySelector('p').innerHTML;
+      //get title and description save it in variables:
+      //use temp variables to manipulate data;
+      this.titleEdit = titleTemp = item.querySelector('h2').innerHTML;
+      this.descrEdit = descrTemp = item.querySelector('p').innerHTML;
       // create new HTML code for replacing in job as a childreplace()?
       let editHtml = `
           <div class="form edit-form">
@@ -165,7 +177,7 @@ class App {
                     type="text"
                     name="title"
                     class="form-title-input"
-                    value="${title}"
+                    value="${titleTemp}"
                   />
                 </div>
                 <div class="form-item">
@@ -173,7 +185,7 @@ class App {
                     type="text"
                     name="description"
                     class="form-descr-input"
-                  >${description}</textarea>
+                  >${descrTemp}</textarea>
                 </div>
               </div>
               <div class="buttons-panel">
@@ -193,17 +205,32 @@ class App {
     //Submit to toDolist if btn-ok is clicked.
     if (e.target.classList.contains('btn-ok')) {
       // Set newly input values to Title and Description:
-      title = item.querySelector('input').value;
-      description = item.querySelector('textarea').value;
+      titleTemp = item.querySelector('input').value;
+      descrTemp = item.querySelector('textarea').value;
       //Add changes to todoList array
-      this.todoList[index].title = title;
-      this.todoList[index].description = description;
+      this.todoList[index].title = titleTemp;
+      this.todoList[index].description = descrTemp;
       //Push chenges to Local Storage
       this._setLocalStorage();
-      //Reload local Storage
-      this._getLocalStorage();
       //Remove EDIT TASK DOM
       item.remove();
+      // Render Task
+      this._renderTask(this.todoList[index]);
+    }
+    //Close edit view and return when btn-back is clicked;
+    if (e.target.classList.contains('btn-back')) {
+      // console.log(title, description);
+      this.todoList[index].title = this.titleEdit;
+      this.todoList[index].description = this.descrEdit;
+      //Set local Storage
+      this._setLocalStorage();
+      //Remove Edit view
+      item.remove();
+      // Render Task back
+      this._renderTask(this.todoList[index]);
+      //Reset temporary title and description.
+      this.titleEdit = this.descrEdit = '';
+      btnNew.classList.toggle('disabled');
     }
 
     //DELETE TASK FUNCTIONALITY:

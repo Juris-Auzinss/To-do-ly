@@ -211,6 +211,10 @@ h5 {
   color: #585858;
 }
 
+.text-container.checked .date-created {
+  text-decoration: none;
+}
+
 /* Right buttons panel */
 .buttons-panel {
   width: 41px;
