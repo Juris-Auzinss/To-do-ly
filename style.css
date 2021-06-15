@@ -27,6 +27,7 @@ body {
     var(--clr-bglinear1) 42.29%,
     var(--clr-bglinear2) 85.87%
   );
+  background-attachment: fixed;
 }
 body::-webkit-scrollbar {
   width: 0;
