@@ -313,6 +313,7 @@ h5 {
   font-size: 70%;
   align-items: center;
   position: relative;
+  font-weight: 300;
 }
 
 @media (max-width: 360px) {
